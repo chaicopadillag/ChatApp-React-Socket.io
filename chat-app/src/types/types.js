@@ -1,6 +1,7 @@
 export const types = {
 	cargarUsuarios: '[CARGAR_USUARIOS]',
-	authLogout: '[AUTH_LOGOUT]',
-	authToken: '[AUTH_TOKEN]',
-	authRegister: '[AUTH_REGISTER]',
+	chatActive: '[CHAT_ACTIVE]',
+	getMessages: '[GET_MESSAGES]',
+	getMessageNew: '[GET_MESSAGE_NEW]',
+	clearChatState: '[CLEAR_CHAT_STATE]',
 };

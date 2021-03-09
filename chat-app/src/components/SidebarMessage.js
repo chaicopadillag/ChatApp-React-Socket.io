@@ -5,7 +5,6 @@ import InboxPeople from './InboxPeople';
 import SearchBox from './SearchBox';
 
 const SidebarMessage = () => {
-	// TODO: class active: border-l-4 border-blue-400
 	const { chatState } = useContext(ChatContext);
 	const { auth } = useContext(AuthContext);
 	const { usuarios } = chatState;

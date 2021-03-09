@@ -1,14 +1,24 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../auth/AuthContext';
+import { ChatContext } from '../context/ChatContext';
+import { types } from '../types/types';
 
 const Header = () => {
 	const { auth, logout } = useContext(AuthContext);
+	const { dispatch } = useContext(ChatContext);
+
+	const handleLogout = () => {
+		dispatch({
+			type: types.clearChatState,
+		});
+		logout();
+	};
 
 	return (
 		<div className="grid grid-cols-8 gap-x-4 py-5 px-5 border-b-2 h-24">
 			<div className="col-span-2 flex items-center justify-between">
 				<div className="font-semibold text-2xl">Chat Code</div>
-				<button className="font-bold text-red-400 px-4 py-2 transition duration-300 ease-in-out mr-8" type="button" onClick={logout}>
+				<button className="font-bold text-red-400 px-4 py-2 transition duration-300 ease-in-out mr-8" type="button" onClick={handleLogout}>
 					Salir
 				</button>
 			</div>

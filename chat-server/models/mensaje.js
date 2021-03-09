@@ -21,9 +21,9 @@ const MensajeSchema = Schema(
 		timestamps: true,
 	}
 );
-MensajeSchema.method('toJSON', function () {
-	const { __v, _id, ...object } = this.toObject();
-	return object;
-});
+// MensajeSchema.method('toJSON', function () {
+// 	const { __v, _id, ...object } = this.toObject();
+// 	return object;
+// });
 
 module.exports = model('Mensaje', MensajeSchema);

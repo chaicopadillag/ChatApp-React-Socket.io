@@ -4,6 +4,7 @@ import { AuthContext } from '../auth/AuthContext';
 import { useSocket } from '../hooks/useSocket';
 import { ChatContext } from './ChatContext';
 import { types } from '../types/types';
+import { scrollToBottomAnimated } from '../helpers/scrollToBottom';
 
 export const SocketContext = createContext();
 
@@ -31,6 +32,16 @@ export const SocketProvider = ({ children }) => {
 				type: types.cargarUsuarios,
 				payload: usuarios,
 			});
+		});
+	}, [socket, dispatch]);
+
+	useEffect(() => {
+		socket?.on('mensaje-uno-a-uno', (mensaje) => {
+			dispatch({
+				type: types.getMessageNew,
+				payload: mensaje,
+			});
+			scrollToBottomAnimated('messages');
 		});
 	}, [socket, dispatch]);
 

@@ -3,6 +3,9 @@ import Chat from '../components/Chat';
 import Header from '../components/Header';
 import InfoContact from '../components/InfoContact';
 import SidebarMessage from '../components/SidebarMessage';
+import moment from 'moment';
+import 'moment/locale/es';
+moment.locale('es');
 const ChatPage = () => {
 	return (
 		<div className="h-screen overflow-hidden flex items-center justify-center" style={{ background: '#edf2f7' }}>
