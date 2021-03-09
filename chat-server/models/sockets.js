@@ -1,4 +1,4 @@
-const { toggleOnline } = require('../controllers/SocketsController');
+const { toggleOnline, getUsuarios } = require('../controllers/SocketsController');
 const { comprobarJsonWebToken } = require('../helpers/jsonWebToken');
 
 class Sockets {
@@ -14,7 +14,7 @@ class Sockets {
 			const [valido, uid] = comprobarJsonWebToken(socket.handshake.query['x-token']);
 
 			if (!valido) {
-				console.log('Cliente con Token no Identificado');
+				// console.log('Cliente con Token no Identificado');
 				return socket.disconnect();
 			}
 			await toggleOnline(uid);
@@ -24,14 +24,16 @@ class Sockets {
 			 */
 			// FIXME: saber que el usuario está activo mediante el UID
 			// TODO: emiti todos los usuarios conectados
+			this.io.emit('listas-usuarios', await getUsuarios());
 			// FIXME: Socket join uid
 			// TODO: escuchar cuando el cliente manda un mensaje mensje personal
 			// FIXME: Deconectar mandar en la db que el usario se desconecto
 			// TODO: emitir todos los usuarios conectados
 
 			socket.on('disconnect', async () => {
-				console.log('Cliente desconectado');
+				// console.log('Cliente desconectado');
 				await toggleOnline(uid);
+				this.io.emit('listas-usuarios', await getUsuarios());
 			});
 		});
 	}

@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../auth/AuthContext';
+import { ChatContext } from '../context/ChatContext';
 import InboxPeople from './InboxPeople';
 import SearchBox from './SearchBox';
 
 const SidebarMessage = () => {
-	const mensajes = [1, 2, 3, 4, 5, 6];
+	// TODO: class active: border-l-4 border-blue-400
+	const { chatState } = useContext(ChatContext);
+	const { auth } = useContext(AuthContext);
+	const { usuarios } = chatState;
+	const { uid } = auth;
 	return (
 		<div className="flex flex-col w-2/5 border-r-2">
 			<SearchBox />
 			<div className="overflow-y-auto">
-				{mensajes.map((num) => (num === 2 ? <InboxPeople key={num} active="border-l-4 border-blue-400" /> : <InboxPeople key={num} active="" />))}
+				{usuarios
+					.filter((user) => user.uid !== uid)
+					.map((usuario) => (
+						<InboxPeople key={usuario.uid} {...usuario} />
+					))}
 			</div>
 		</div>
 	);

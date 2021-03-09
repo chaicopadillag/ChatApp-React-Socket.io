@@ -8,4 +8,9 @@ const toggleOnline = async (uid) => {
 	return usuario;
 };
 
-module.exports = { toggleOnline };
+const getUsuarios = async () => {
+	const usuarios = await Usuario.find().sort('-online');
+	return usuarios;
+};
+
+module.exports = { toggleOnline, getUsuarios };
